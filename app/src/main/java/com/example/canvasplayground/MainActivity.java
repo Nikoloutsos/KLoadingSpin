@@ -15,16 +15,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button startButton = findViewById(R.id.btn);
+        Button startButton = findViewById(R.id.btn_start);
+        Button stopButton = findViewById(R.id.btn_stop);
         final KNView customView = findViewById(R.id.KNView);
+
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 customView.setIsVisible(true);
                 customView.startAnimation();
+
             }
         });
+
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customView.stopAnimation();
+            }
+        });
+
+
 
 
     }
