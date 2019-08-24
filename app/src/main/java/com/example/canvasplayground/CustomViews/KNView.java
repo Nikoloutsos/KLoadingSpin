@@ -37,6 +37,15 @@ public class KNView extends View {
     Integer mTextSize = 70;
     Integer mTextColor = Color.WHITE;
 
+    Integer backGroundColor;
+    Integer spinnerPrimaryColor;
+    Integer spinnerSecondaryColor;
+    Integer textColor;
+    Integer textSize;
+
+
+    private ValueAnimator mValueAnimator;
+
 
 
     // Flags
@@ -67,13 +76,36 @@ public class KNView extends View {
 
 
         try {
-            String text = a.getString(R.styleable.KNView_text);
-
-            Log.d("test", "KNView: " + text);
-
+            text = a.getString(R.styleable.KNView_text);
+            mRotationSpeedInMs = a.getInteger(R.styleable.KNView_rotationSpeedInMs, 1300);
+            backGroundColor = a.getColor(R.styleable.KNView_backgroundColor, 0x88094373);
+            spinnerPrimaryColor = a.getColor(R.styleable.KNView_primarySpinnerColor, 0xffffff);
+            spinnerSecondaryColor = a.getColor(R.styleable.KNView_secondarySpinnerColor, 0xff5723);
+            textColor = a.getColor(R.styleable.KNView_textColor, 0xffffff);
+            textSize = a.getInteger(R.styleable.KNView_textSize, 70);
         } finally {
             a.recycle();
         }
+
+
+        mBackgroundPaint.setColor(backGroundColor);
+        mBackgroundPaint.setStyle(Paint.Style.FILL);
+        mBackgroundPaint.setAntiAlias(true);
+
+        mPrimaryCircleColor.setColor(spinnerPrimaryColor);
+        mPrimaryCircleColor.setStyle(Paint.Style.FILL);
+        mPrimaryCircleColor.setAntiAlias(true);
+
+        mSecondaryCircleColor.setColor(spinnerSecondaryColor);
+        mSecondaryCircleColor.setStyle(Paint.Style.FILL);
+        mSecondaryCircleColor.setAntiAlias(true);
+
+        mTextPaint.setColor(textColor);
+        mTextPaint.setStyle(Paint.Style.FILL);
+        mTextPaint.setAntiAlias(true);
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
+        mTextPaint.setTextSize(textSize);
+
 
     }
 
@@ -84,11 +116,24 @@ public class KNView extends View {
 
     }
 
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        if (!mIsVisible) return;
+
+        init();
+        canvas.translate(mLeftGrid, mTopGrid);
+        canvas.drawPaint(mBackgroundPaint); // Draw background
+
+        canvas.save();
+        drawHoledCircle(canvas);
+        canvas.restore();
+    }
+
     private void init(){
 
         mMargin = 40;
-        mRotationSpeedInMs = 1000;
-
         mTotalHeight = getHeight();
         mTotalWidth = getWidth();
 
@@ -97,26 +142,8 @@ public class KNView extends View {
         mRightGrid = mTotalWidth - mMargin;
         mBottomGrid = mTotalHeight - mMargin;
 
-        mBackgroundPaint.setColor(0x88094373);
-        mBackgroundPaint.setStyle(Paint.Style.FILL);
-        mBackgroundPaint.setAntiAlias(true);
 
-        mPrimaryCircleColor.setColor(Color.WHITE);
-        mPrimaryCircleColor.setStyle(Paint.Style.FILL);
-        mPrimaryCircleColor.setAntiAlias(true);
-
-        mSecondaryCircleColor.setColor(Color.parseColor("#ff5723"));
-        mSecondaryCircleColor.setStyle(Paint.Style.FILL);
-        mSecondaryCircleColor.setAntiAlias(true);
-
-        mTextPaint.setColor(Color.WHITE);
-        mTextPaint.setStyle(Paint.Style.FILL);
-        mTextPaint.setAntiAlias(true);
-        mTextPaint.setTextAlign(Paint.Align.CENTER);
-        mTextPaint.setTextSize(70);
     }
-
-
 
     protected void drawHoledCircle(Canvas canvas){
 
@@ -156,27 +183,6 @@ public class KNView extends View {
 
     }
 
-
-
-
-
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        if (!mIsVisible) return;
-
-        init();
-        canvas.translate(mLeftGrid, mTopGrid);
-        canvas.drawPaint(mBackgroundPaint); // Draw background
-
-        canvas.save();
-        drawHoledCircle(canvas);
-        canvas.restore();
-    }
-
-
-
     // Determines if the loading spin in visible or not
     public void setIsVisible(Boolean isVisible){
         mIsVisible = isVisible;
@@ -184,12 +190,22 @@ public class KNView extends View {
 
     }
 
+    public void stopAnimation(){
+        mValueAnimator.removeAllUpdateListeners();
+        setIsVisible(false);
+        invalidate();
+    }
+
+
     public void startAnimation(){
-        ValueAnimator animator = ValueAnimator.ofFloat(0, 360);
-        animator.removeAllUpdateListeners();
-        animator.setDuration(mRotationSpeedInMs);
-        animator.setInterpolator(new LinearInterpolator());
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        if (mValueAnimator != null){
+            mValueAnimator.removeAllUpdateListeners();
+        }
+        mValueAnimator = ValueAnimator.ofFloat(0, 360);
+        mValueAnimator.removeAllUpdateListeners();
+        mValueAnimator.setDuration(mRotationSpeedInMs);
+        mValueAnimator.setInterpolator(new LinearInterpolator());
+        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
                 mRotateDegrees = (float)animation.getAnimatedValue();
                 invalidate();
@@ -202,6 +218,6 @@ public class KNView extends View {
 
             }
         });
-        animator.start();
+        mValueAnimator.start();
     }
 }
