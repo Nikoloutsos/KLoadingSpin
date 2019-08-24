@@ -31,6 +31,9 @@ public class KNView extends View {
     Integer mBottomGrid;
     Integer mMargin;
     float mRotateDegrees = 0f;
+    Integer mTextSize = 70;
+    Integer mTextColor = Color.WHITE;
+
 
 
     // Flags
