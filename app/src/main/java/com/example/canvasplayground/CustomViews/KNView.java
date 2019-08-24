@@ -2,6 +2,7 @@ package com.example.canvasplayground.CustomViews;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+
+import com.example.canvasplayground.R;
 
 public class KNView extends View {
 
@@ -56,6 +59,21 @@ public class KNView extends View {
 
     public KNView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        TypedArray a = context.getTheme().obtainStyledAttributes(
+                attrs,
+                R.styleable.KNView,
+                0, 0);
+
+
+        try {
+            String text = a.getString(R.styleable.KNView_text);
+
+            Log.d("test", "KNView: " + text);
+
+        } finally {
+            a.recycle();
+        }
 
     }
 

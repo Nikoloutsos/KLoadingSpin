@@ -43,7 +43,8 @@
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toTopOf="@+id/imageView"
-       app:backgroundColor="#66FF3333"/>
+       app:backgroundColor="#66FF3333"
+       app:text="this is a text"/>
 
 
 
