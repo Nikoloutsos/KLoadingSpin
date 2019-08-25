@@ -1,7 +1,4 @@
-package com.example.canvasplayground.CustomViews;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.example.kloadingspin;
 
 public class StringUtils {
 

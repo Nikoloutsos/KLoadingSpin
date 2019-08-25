@@ -1,4 +1,4 @@
-package com.example.canvasplayground.CustomViews;
+package com.example.kloadingspin;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -11,12 +11,9 @@ import android.graphics.Region;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
-import com.example.canvasplayground.R;
-
-public class KNView extends View {
+public class KLoadingSpin extends View {
 
     // Paint
     Paint mBackgroundPaint = new Paint();
@@ -62,27 +59,27 @@ public class KNView extends View {
     Path mRectanglePath = new Path();
 
 
-    public KNView(Context context) {
+    public KLoadingSpin(Context context) {
         super(context);
     }
 
-    public KNView(Context context, AttributeSet attrs) {
+    public KLoadingSpin(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
-                R.styleable.KNView,
+                R.styleable.KLoadingSpin,
                 0, 0);
 
 
         try {
-            text = a.getString(R.styleable.KNView_text);
-            mRotationSpeedInMs = a.getInteger(R.styleable.KNView_rotationSpeedInMs, 1300);
-            backGroundColor = a.getColor(R.styleable.KNView_backgroundColor, 0x88094373);
-            spinnerPrimaryColor = a.getColor(R.styleable.KNView_primarySpinnerColor, 0xffffff);
-            spinnerSecondaryColor = a.getColor(R.styleable.KNView_secondarySpinnerColor, 0xff5723);
-            textColor = a.getColor(R.styleable.KNView_textColor, 0xffffff);
-            textSize = a.getInteger(R.styleable.KNView_textSize, 70);
+            text = a.getString(R.styleable.KLoadingSpin_text);
+            mRotationSpeedInMs = a.getInteger(R.styleable.KLoadingSpin_rotationSpeedInMs, 1300);
+            backGroundColor = a.getColor(R.styleable.KLoadingSpin_backgroundColor, 0x88094373);
+            spinnerPrimaryColor = a.getColor(R.styleable.KLoadingSpin_primarySpinnerColor, 0xffffff);
+            spinnerSecondaryColor = a.getColor(R.styleable.KLoadingSpin_secondarySpinnerColor, 0xff5723);
+            textColor = a.getColor(R.styleable.KLoadingSpin_textColor, 0xffffff);
+            textSize = a.getInteger(R.styleable.KLoadingSpin_textSize, 70);
         } finally {
             a.recycle();
         }
@@ -109,7 +106,7 @@ public class KNView extends View {
 
     }
 
-    public KNView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public KLoadingSpin(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
 
@@ -168,19 +165,16 @@ public class KNView extends View {
         canvas.drawCircle(0,0, Math.min(workingHeight, workingWidth)/4, mSecondaryCircleColor);
         canvas.restore();
 
+        if (text != null) {
+            String[] lines = StringUtils.splitStringInLines(text);
 
-        String[] lines = StringUtils.splitStringInLines(text);
-
-
-        int i = 1;
-        for (String line : lines){
-            canvas.drawText(line, 0, Math.min(workingHeight, workingWidth)/4 +
-                    i*((mTextPaint.descent() - mTextPaint.ascent()) / 2) + 40 +  i*20, mTextPaint );
-            i++;
+            int i = 1;
+            for (String line : lines){
+                canvas.drawText(line, 0, Math.min(workingHeight, workingWidth)/4 +
+                        i*((mTextPaint.descent() - mTextPaint.ascent()) / 2) + 40 +  i*20, mTextPaint );
+                i++;
+            }
         }
-
-
-
     }
 
     // Determines if the loading spin in visible or not
@@ -221,3 +215,4 @@ public class KNView extends View {
         mValueAnimator.start();
     }
 }
+

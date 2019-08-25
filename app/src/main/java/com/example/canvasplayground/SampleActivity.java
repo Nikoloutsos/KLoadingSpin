@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.canvasplayground.CustomViews.KNView;
+import com.example.kloadingspin.KLoadingSpin;
 
-public class MainActivity extends AppCompatActivity {
+public class SampleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button startButton = findViewById(R.id.btn_start);
         Button stopButton = findViewById(R.id.btn_stop);
-        final KNView customView = findViewById(R.id.KNView);
+        final KLoadingSpin customView = findViewById(R.id.KLoadingSpin);
 
 
         startButton.setOnClickListener(new View.OnClickListener() {

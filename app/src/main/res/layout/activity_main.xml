@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".SampleActivity"
     android:background="#f1f1f1">
 
 
@@ -15,10 +15,11 @@
        android:layout_marginEnd="32dp"
        android:layout_marginBottom="12dp"
        android:text="start"
-       app:layout_constraintBottom_toBottomOf="@+id/KNView"
+       app:layout_constraintBottom_toBottomOf="@+id/KLoadingSpin"
        app:layout_constraintEnd_toEndOf="parent"
        android:background="#FFC107"
-       android:stateListAnimator="@null"/>
+       android:stateListAnimator="@null"
+       android:layout_marginRight="32dp" />
 
    <Button
        android:id="@+id/btn_stop"
@@ -27,11 +28,13 @@
        android:layout_marginStart="32dp"
        android:layout_marginEnd="8dp"
        android:layout_marginBottom="12dp"
-       app:layout_constraintBottom_toBottomOf="@+id/KNView"
+       app:layout_constraintBottom_toBottomOf="@+id/KLoadingSpin"
        android:background="#FF5722"
        app:layout_constraintStart_toStartOf="parent"
        android:text="stop"
-       android:stateListAnimator="@null"/>
+       android:stateListAnimator="@null"
+       android:layout_marginRight="8dp"
+       android:layout_marginLeft="32dp" />
 
    <ImageView
        android:id="@+id/imageView"
@@ -45,11 +48,15 @@
        app:layout_constraintTop_toTopOf="parent"
        android:src="@mipmap/ic_launcher"/>
 
-   <com.example.canvasplayground.CustomViews.KNView
-       android:id="@+id/KNView"
+
+
+
+
+   <com.example.kloadingspin.KLoadingSpin
+       android:id="@+id/KLoadingSpin"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       app:backgroundColor="#552196F3"
+       app:backgroundColor="#55008DFF"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintHorizontal_bias="0.0"
@@ -58,8 +65,7 @@
        app:layout_constraintVertical_bias="1.0"
        app:primarySpinnerColor="#ffffff"
        app:rotationSpeedInMs="3000"
-       app:secondarySpinnerColor="#aa3333"
-       app:text="Ψάχνουμε το καλύτερο \n ραντεβού για εσάς!"
+       app:secondarySpinnerColor="#FF9800"
        app:textColor="#ffffff"
        app:textSize="80" />
 
