@@ -4,7 +4,8 @@
 Here goes a small video which is showing how the custom view works.
 
 ## Preview
-![preview](https://i.imgur.com/4hi96J4.png)
+
+![](images/sample.gif)
 
 ## Gradle Dependency
 
