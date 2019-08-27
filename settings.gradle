@@ -1,1 +1,1 @@
-include ':app', ':kloadingspin'
+include ':sample', ':kloadingspin'

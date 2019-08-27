@@ -31,8 +31,7 @@ public class KLoadingSpin extends View {
     Integer mBottomGrid;
     Integer mMargin;
     float mRotateDegrees = 0f;
-    Integer mTextSize = 70;
-    Integer mTextColor = Color.WHITE;
+
 
     Integer backGroundColor;
     Integer spinnerPrimaryColor;
@@ -52,7 +51,7 @@ public class KLoadingSpin extends View {
     Integer mRotationSpeedInMs = 1200;
 
 
-    String text = "Βρίσκουμε το καλύτερο \n ραντεβού για εσάς...";
+    String text = "Please wait...";
 
     // Path
     Path mCircleHolePath = new Path();
@@ -203,7 +202,7 @@ public class KLoadingSpin extends View {
             public void onAnimationUpdate(ValueAnimator animation) {
                 mRotateDegrees = (float)animation.getAnimatedValue();
                 invalidate();
-                Log.d("test", "onAnimationUpdate: " + mRotateDegrees);
+
 
                 if (mRotateDegrees == 360){
                     startAnimation();
