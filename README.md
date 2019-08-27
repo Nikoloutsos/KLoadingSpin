@@ -1,7 +1,5 @@
 # LoadingSpin
->Android loading progress
-
-Here goes a small video which is showing how the custom view works.
+>Android loading progress.
 
 ## Preview
 
