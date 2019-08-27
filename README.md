@@ -1,5 +1,3 @@
-# LoadingSpin
->Android loading progress.
 
 ## Preview
 
