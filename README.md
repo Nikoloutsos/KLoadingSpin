@@ -40,6 +40,23 @@ dependencies {
        app:textColor="#ffffff"
        app:textSize="80" />
  ```
+ 
+
+ 
+ - Run the following code to show/hide
+ 
+  ```java
+	// For showing
+	KLoadingSpin a = findViewById(R.id.loading);
+	a.startAnimation();
+        a.setIsVisible(true);
+	
+	// For hiding
+	KLoadingSpin a = findViewById(R.id.loading);
+	a.stopAnimation()
+	
+   ```   
+ 
 
 ## Customize
 
