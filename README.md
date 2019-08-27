@@ -6,7 +6,17 @@
 ![](images/sample.gif)
 
 ## Gradle Dependency
+- Add jitpack to your project
 
+```gradle
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+- Add the dependency
 ``` gradle
 dependencies {
     implementation 'add-here'
@@ -15,7 +25,8 @@ dependencies {
 
 ## Usage
 
-- Add it in you xml and make it fill the entire screen.
+- Add it in your xml and make it fill the entire screen.
+
 
 
 ```xml
