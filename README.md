@@ -19,7 +19,7 @@ allprojects {
 - Add the dependency
 ``` gradle
 dependencies {
-    implementation 'add-here'
+    implementation 'com.github.Nikoloutsos:KLoadingSpin:1.0.0'
  }
  ```
 
