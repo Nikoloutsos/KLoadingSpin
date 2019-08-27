@@ -19,7 +19,8 @@ dependencies {
 - Add it in you xml and make it fill the entire screen.
 
 
-``` <com.example.kloadingspin.KLoadingSpin
+```xml
+<com.example.kloadingspin.KLoadingSpin
        android:id="@+id/KLoadingSpin"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
