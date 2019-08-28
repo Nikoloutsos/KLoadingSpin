@@ -35,7 +35,7 @@ dependencies {
        app:backgroundColor="#55008DFF"
        app:primarySpinnerColor="#ffffff"
        app:rotationSpeedInMs="3000"
-       app:text="Searching for the best \n data for you..."
+       app:text="Searching for the best \n donut for you..."
        app:secondarySpinnerColor="#FF9800"
        app:textColor="#ffffff"
        app:textSize="80" />
