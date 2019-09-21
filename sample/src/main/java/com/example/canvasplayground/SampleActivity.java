@@ -25,6 +25,7 @@ public class SampleActivity extends AppCompatActivity {
             public void onClick(View view) {
                 customView.setIsVisible(true);
                 customView.startAnimation();
+                customView.changeSpinnerDimension(100, 200);
 
             }
         });
@@ -35,9 +36,6 @@ public class SampleActivity extends AppCompatActivity {
                 customView.stopAnimation();
             }
         });
-
-
-
 
     }
 }
