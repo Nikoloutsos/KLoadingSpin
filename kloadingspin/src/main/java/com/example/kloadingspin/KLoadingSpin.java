@@ -32,6 +32,9 @@ public class KLoadingSpin extends View {
     Integer mMargin;
     float mRotateDegrees = 0f;
 
+    Integer mPrimaryCicleRadius;
+    Integer mSecondaryCircleRadius;
+
 
     Integer backGroundColor;
     Integer spinnerPrimaryColor;
@@ -138,6 +141,14 @@ public class KLoadingSpin extends View {
         mRightGrid = mTotalWidth - mMargin;
         mBottomGrid = mTotalHeight - mMargin;
 
+        Integer workingWidth = (mRightGrid - mLeftGrid) / 2;
+        Integer workingHeight = (mBottomGrid - mTopGrid) / 2;
+
+
+        if (mSecondaryCircleRadius == null || mPrimaryCicleRadius == null){
+            mSecondaryCircleRadius =  Math.min(workingWidth, workingHeight)/5;
+            mPrimaryCicleRadius =  Math.min(workingWidth, workingHeight)/4;
+        }
 
     }
 
@@ -151,17 +162,17 @@ public class KLoadingSpin extends View {
         canvas.save();
         canvas.rotate(mRotateDegrees);
         mCircleHolePath.reset();
-        mCircleHolePath.addCircle(0,0, Math.min(workingHeight, workingWidth)/5, Path.Direction.CW);
+        mCircleHolePath.addCircle(0,0, mSecondaryCircleRadius, Path.Direction.CW);
         canvas.clipPath(mCircleHolePath, Region.Op.DIFFERENCE);
 
-        canvas.drawCircle(0,0, Math.min(workingHeight, workingWidth)/4, mPrimaryCircleColor);
+        canvas.drawCircle(0,0, mPrimaryCicleRadius, mPrimaryCircleColor);
 
-        mRectanglePath.addRect(0, -Math.min(workingHeight, workingWidth)/4,
-                Math.min(workingHeight, workingWidth)/4,
+        mRectanglePath.addRect(0, -mPrimaryCicleRadius,
+                mPrimaryCicleRadius,
                 0, Path.Direction.CCW);
         canvas.clipPath(mRectanglePath, Region.Op.INTERSECT);
 
-        canvas.drawCircle(0,0, Math.min(workingHeight, workingWidth)/4, mSecondaryCircleColor);
+        canvas.drawCircle(0,0, mPrimaryCicleRadius, mSecondaryCircleColor);
         canvas.restore();
 
         if (text != null) {
@@ -169,20 +180,26 @@ public class KLoadingSpin extends View {
 
             int i = 1;
             for (String line : lines){
-                canvas.drawText(line, 0, Math.min(workingHeight, workingWidth)/4 +
+                canvas.drawText(line, 0, mPrimaryCicleRadius +
                         i*((mTextPaint.descent() - mTextPaint.ascent()) / 2) + 40 +  i*20, mTextPaint );
                 i++;
             }
         }
     }
 
-    // Determines if the loading spin in visible or not
+    /**
+     *
+     * @param isVisible Determines the the KLoadingSpin should be visible
+     */
     public void setIsVisible(Boolean isVisible){
         mIsVisible = isVisible;
         invalidate();
 
     }
 
+    /**
+     * Stops the animation and KLoadingSpin automatically hides itself
+     */
     public void stopAnimation(){
         mValueAnimator.removeAllUpdateListeners();
         setIsVisible(false);
@@ -190,6 +207,10 @@ public class KLoadingSpin extends View {
     }
 
 
+    /**
+     * Starts the animation.
+     * This does not mean that the spinner is visible
+     */
     public void startAnimation(){
         if (mValueAnimator != null){
             mValueAnimator.removeAllUpdateListeners();
@@ -213,5 +234,21 @@ public class KLoadingSpin extends View {
         });
         mValueAnimator.start();
     }
+
+
+    /**
+     *
+     * @param size The size of the circle
+     * @param fat How thin your spinner want to be?
+     */
+    public void changeSpinnerDimension(Integer size, Integer fat){
+        mPrimaryCicleRadius = size;
+
+
+        mSecondaryCircleRadius = mPrimaryCicleRadius - fat;
+        if (mSecondaryCircleRadius < 0) mSecondaryCircleRadius = 0;
+    }
+
+
 }
 
