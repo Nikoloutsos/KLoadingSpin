@@ -4,7 +4,7 @@
 ## Preview
 
 
-![](images/sample.gif)
+![](images/gifSpinner.gif)
 
 ## Gradle Dependency
 - Add jitpack to your project
