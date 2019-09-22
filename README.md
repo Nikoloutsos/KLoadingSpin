@@ -50,12 +50,12 @@ dependencies {
  
   ```java
 	// For showing
-	KLoadingSpin a = findViewById(R.id.loading);
+	KLoadingSpin a = findViewById(R.id.KLoadingSpin);
 	a.startAnimation();
         a.setIsVisible(true);
 	
 	// For hiding
-	KLoadingSpin a = findViewById(R.id.loading);
+	KLoadingSpin a = findViewById(R.id.KLoadingSpin);
 	a.stopAnimation()
 	
    ```   
