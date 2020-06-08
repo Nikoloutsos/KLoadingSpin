@@ -26,4 +26,4 @@ before_install:
   - yes | sdkmanager "platforms;android-28"
 
 script:
- - ./gradlew build connectedCheck
+ - ./gradlew build
